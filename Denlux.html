@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>LS store</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #111;
+    color: white;
+}
+
+header {
+    background: black;
+    padding: 20px;
+    text-align: center;
+    font-size: 28px;
+    letter-spacing: 2px;
+}
+
+.cart-top {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    background: #222;
+}
+
+nav a {
+    color: white;
+    padding: 15px 25px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background: red;
+}
+
+/* Банер */
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    background: url("https://images.unsplash.com/photo-1521336575822-6da63fb45455") no-repeat center/cover;
+}
+
+.hero h1 {
+    font-size: 50px;
+}
+
+/* Товари */
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 40px;
+}
+
+.card {
+    background: #222;
+    margin: 15px;
+    padding: 15px;
+    width: 250px;
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+button {
+    padding: 10px;
+    background: red;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Кошик */
+.cart-box {
+    position: fixed;
+    right: 20px;
+    top: 80px;
+    background: #222;
+    padding: 20px;
+    width: 300px;
+    display: none;
+    border-radius: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: black;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    Lifestyleforce
+    <div class="cart-top" onclick="toggleCart()">
+        Кошик🛒 (<span id="count">0</span>)
+    </div>
+</header>
+
+<nav>
+    <a href="#contacts">Контакти</a>
+    <a href="#">Контакти</a>
+</nav>
+
+<section class="hero">
+    <h1>Брендовий одяг 2026</h1>
+    <p>Стиль. Якість. Твій вибір.</p>
+</section>
+
+<section class="products">
+
+    <div class="card">
+        <img src="https://newcop.com/cdn/shop/files/img04_56271563-0ce5-47c5-aef1-7e69879276b1.jpg?v=1768326009&width=1445">
+        <h3>Nike mind 001</h3>
+        <p>2790 грн</p>
+        <h3>розміри 40-46</h3>
+        <button onclick="addToCart('Nike mind 001', 2790)">Додати</button>
+        <button onclick="openModal('Nike mind 001', 'Тапки Nike MIND 001 — футуристична модель у світло‑сірому кольорі з унікальним дизайном. Верх із перфорацією забезпечує вентиляцію та комфорт, а підошва з яскравими помаранчевими елементами створює амортизацію та стильний акцент. Маленькі логотипи Nike додають впізнаваності. Унісекс модель підходить як чоловікам, так і жінкам, ідеальна для щоденного використання та стрітстайл образів.     ', 'https://newcop.com/cdn/shop/files/img04_56271563-0ce5-47c5-aef1-7e69879276b1.jpg?v=1768326009&width=1445')">
+    Детальніше
+</button>
+    </div>
+
+    <div class="card">
+        <img src="https://www.mrporter.com/variants/images/2307389541958053/in/w2000_q60.jpg">
+        <h3>КЕПКА LORO PIANA</h3>
+        <p>950 грн</p>
+        <h3>Розмір: one-size</h3>
+        <h4>Кольори: чорний, білий, темно-синій, бежевий</h4>
+        <button onclick="addToCart('КЕПКА LORO PIANA', 950)">Додати</button>
+     <button onclick="openModal(
+'КЕПКА LORO PIANA',
+'Кепка-бейсболка Loro Piana — преміальний аксесуар для щоденного використання. Виконана з високоякісних матеріалів, має легку еластичну резинку для регулювання під будь‑який розмір. Дихаюча внутрішня підкладка забезпечує комфорт навіть у теплу погоду. Фірмовий вишитий логотип на передній частині доповнений металевим шильдиком, а внутрішнє оздоблення виконане у стилі бренду',
+'https://domino.ua/media/iopt/catalog/product/cache/1338d3702d6df92e886ded663f0927b0/1/7/178715-1.webp'
+)">
+Детальніше
+</button>
+    </div>
+
+    <div class="card">
+        <img src="https://xcdn.next.co.uk/common/items/default/default/itemimages/3_4Ratio/product/lge/F64020s.jpg?im=Resize,width=750">
+        <h3> КЕПКА POLO RALPH LAUREN</h3>
+        <p>750 грн</p>
+        <button onclick="addToCart(' КЕПКА POLO RALPH LAUREN', 750)">Додати</button>
+    <button onclick="openModal(
+ 'КЕПКА POLO RALPH LAUREN',
+ 'Polo Ralph Lauren — класична бейсболка, яка поєднує спортивний характер та елегантність бренду. Щільна тканина забезпечує довговічність, а регульований ремінець дозволяє зручно підігнати розмір. Вишитий логотип додає стильного акценту та робить модель впізнаваною.','https://xcdn.next.co.uk/common/items/default/default/itemimages/3_4Ratio/product/lge/F64020s.jpg?im=Resize,width=750',
+'https://domino.ua/media/iopt/catalog/product/cache/1338d3702d6df92e886ded663f0927b0/1/7/178715-1.webp'
+)">
+Детальніше
+</button>
+    </div>
+     <div class="card">
+        <img src="https://dealer.od.ua/image/catalog/image-site/10257/montazhnaya-oblast-1-png_1.png">
+        <h3> ЗІП-СВІТШОТ STONE ISLAND BLACK</h3>
+        <p>1750 грн</p>
+        <button onclick="addToCart(' ЗІП-СВІТШОТ STONE ISLAND BLACK', 1750)">Додати</button>
+    <button onclick="openModal(
+' ЗІП-СВІТШОТ STONE ISLAND BLACK',
+'Зіп‑світшот Stone Island у чорному кольорі з 1/3‑зіп застібкою — стильна та практична річ для будь‑якого сезону. Виконаний з якісної бавовни з фірмовим патчем‑компасом на рукаві, він поєднує комфорт та люкс‑стиль. Класичний крій підходить як чоловікам, так і жінкам. Ідеальний для щоденного використання, стрітстайл та преміум образів'
+)">
+
+</section>
+
+<!-- Кошик -->
+<div class="cart-box" id="cartBox">
+    <h3>Кошик</h3>
+    <ul id="cartItems"></ul>
+    <p>Сума: <span id="total">0</span> грн</p>
+
+    <button onclick="checkout()" style="width:100%; margin-top:10px;">
+        Перейти до оплати
+    </button>
+
+</div>
+
+<footer>
+    <section id="contacts" style="padding: 50px; text-align: center; background: #181818;">
+    <h2>Контакти</h2>
+    <p>📧 Email: lifestyleforce@gmail.com</p>
+    <p>📍 Локація: Україна</p>
+
+    <a href="https://t.me/unc0nsci0usnesss" target="_blank">
+        <button style="margin-top: 15px; padding: 10px 20px; background: red; color: white; border: none; cursor: pointer;">
+            Написати в Telegram
+        </button>
+    </a>
+</section>
+    © 2026 LS store
+</footer>
+
+<script>
+    function removeItem(index) {
+    total -= cart[index].price;
+    cart.splice(index, 1);
+
+    document.getElementById("count").innerText = cart.length;
+    updateCart();
+}
+    function checkout() {
+    if (cart.length === 0) {
+        alert("Кошик пустий!");
+        return;
+    }
+
+    let message = "Замовлення:%0A";
+
+    cart.forEach(item => {
+        message += item.name + " - " + item.price + " грн%0A";
+    });
+
+    message += "%0AСума: " + total + " грн";
+
+    let telegramLink = "https://t.me/unc0nsci0usnesss?text=" + message;
+
+    window.open(telegramLink, "_blank");
+}
+let cart = [];
+let total = 0;
+
+function addToCart(name, price) {
+    cart.push({name, price});
+    total += price;
+
+    document.getElementById("count").innerText = cart.length;
+    updateCart();
+}
+
+function updateCart() {
+ let list = document.getElementById("cartItems");
+    list.innerHTML = "";
+
+    cart.forEach((item, index) => {
+        let li = document.createElement("li");
+
+        li.innerHTML = `
+            ${item.name} - ${item.price} грн 
+            <button onclick="removeItem(${index})" style="margin-left:10px; background:red; color:white; border:none; cursor:pointer;">
+                ❌
+            </button>
+        `;
+
+        list.appendChild(li);
+    });
+
+    document.getElementById("total").innerText = total;
+}
+
+function toggleCart() {
+    let box = document.getElementById("cartBox");
+    box.style.display = box.style.display === "block" ? "none" : "block";
+}
+
+function openModal(title, desc, img) {
+    document.getElementById("modal").style.display = "flex";
+    document.getElementById("modalTitle").innerText = title;
+    document.getElementById("modalDesc").innerText = desc;
+    document.getElementById("modalImg").src = img;
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+</script>
+<div id="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center;">
+
+    <div style="background:#222; padding:20px; border-radius:10px; width:300px; text-align:center; position:relative;">
+        
+        <span onclick="closeModal()" style="position:absolute; right:10px; top:5px; cursor:pointer; font-size:20px;">✖</span>
+
+        <img id="modalImg" style="width:100%; border-radius:10px;">
+        <h3 id="modalTitle"></h3>
+        <p id="modalDesc"></p>
+
+    </div>
+
+</div>
+
+</body>
+</html>
